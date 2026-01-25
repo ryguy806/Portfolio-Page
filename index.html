@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Sheet Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/scripts.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'cinzel': ['Cinzel', 'serif'],
+                        'garamond': ['EB Garamond', 'serif'],
+                    },
+                    colors: {
+                        'parchment': '#f4f1ea',
+                        'dnd-border': '#8b7355',
+                        'dnd-dark': '#5a3a1a',
+                        'dnd-bg': '#2a2520',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .texture-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(139,115,85,0.03) 2px, rgba(139,115,85,0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(139,115,85,0.03) 2px, rgba(139,115,85,0.03) 4px);
+            pointer-events: none;
+        }
+
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0f0f1e 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeOut 1s ease-out 5s forwards; 
+        }
+
+        @keyframes fadeOut {
+            /* At the start of the animation sequence (after the 5s delay) */
+            0% {
+                opacity: 1;
+                visibility: visible; /* Ensure it is visible while fading */
+            }
+            /* At the end of the animation sequence */
+            100% {
+                opacity: 0;
+                visibility: hidden; /* Hide the element completely after fading */
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                visibility: hidden; 
+            }
+            100% {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        #dice-container {
+            width: 400px;
+            height: 400px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .triangle-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
+            }
+            50% {
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.9));
+            }
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 173px solid #ffd700;
+            position: relative;
+            filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.8));
+        }
+
+        .triangle-number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, 50%);
+            font-family: 'Cinzel', serif;
+            font-size: 80px;
+            font-weight: bold;
+            color: #000;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .critical-success {
+            font-family: 'Cinzel', serif;
+            font-size: 48px;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.5);
+            opacity: 0;
+            animation: criticalSuccess 1.5s ease-in-out 1.5s forwards;
+        }
+
+        @keyframes criticalSuccess {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .loading-text {
+            display: none;
+        }
+
+        #main-content {
+            opacity: 0;
+            animation: fadeIn 1s ease-out 6s forwards; 
+        }
+
+        #main-content.show {
+            opacity: 1;
+        }
+
+        @media (max-width: 640px) {
+            #dice-container {
+                width: 300px;
+                height: 300px;
+            }
+            .roll-button {
+                font-size: 20px;
+                padding: 12px 30px;
+            }
+            .critical-success {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-dnd-bg font-garamond text-dnd-bg overflow-x-hidden">
+    
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <div id="dice-container">
+            <div class="triangle-container">
+                <div class="triangle">
+                    <div class="triangle-number">20</div>
+                </div>
+            </div>
+        </div>
+        <div class="critical-success" id="critical-text">CRITICAL SUCCESS!</div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content" class="p-4 md:p-6 lg:p-8 min-h-screen">
+        <div class="max-w-7xl mx-auto bg-parchment border-2 md:border-4 border-dnd-border shadow-2xl p-6 md:p-8 lg:p-12 relative texture-overlay">
+            
+            <!-- Header Section -->
+            <header class="border-2 border-dnd-border p-4 md:p-6 mb-6 md:mb-8 bg-white bg-opacity-30 shadow-inner">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 items-center">
+                    <div>
+                        <h1 class="font-cinzel text-3xl md:text-4xl lg:text-5xl font-bold tracking-wider text-dnd-dark mb-2">
+                            Aiden Stormforge
+                        </h1>
+                        <p class="text-lg md:text-xl text-dnd-border italic">
+                            "Weaver of Digital Realms"
+                        </p>
+                    </div>
+                    <div class="border-2 border-dnd-border p-3 md:p-4 text-center bg-white bg-opacity-50">
+                        <div class="text-xs md:text-sm uppercase tracking-wider text-dnd-border mb-1">Class</div>
+                        <div class="text-xl md:text-2xl font-semibold">Senior Frontend Dev</div>
+                    </div>
+                    <div class="border-2 border-dnd-border p-3 md:p-4 text-center bg-white bg-opacity-50">
+                        <div class="text-xs md:text-sm uppercase tracking-wider text-dnd-border mb-1">Level</div>
+                        <div class="text-xl md:text-2xl font-semibold">7</div>
+                        <div class="text-sm text-dnd-border">Years Experience</div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Ability Scores Section -->
+            <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4 mb-6 md:mb-8">
+                <div class="border-2 border-dnd-border p-3 md:p-4 text-center bg-white bg-opacity-40">
+                    <div class="font-cinzel text-xs md:text-sm uppercase tracking-wider text-dnd-border mb-2 font-semibold">Strength</div>
+                    <div class="text-3xl md:text-4xl font-bold text-dnd-dark mb-1">14</div>
+                    <div class="text-lg md:text-xl text-dnd-border">+2</div>
+                    <div class="text-xs italic mt-2">Problem Solving</div>
+                </div>
+                <div class="border-2 border-dnd-border p-3 md:p-4 text-center bg-white bg-opacity-40">
+                    <div class="font-cinzel text-xs md:text-sm uppercase tracking-wider text-dnd-border mb-2 font-semibold">Dexterity</div>
+                    <div class="text-3xl md:text-4xl font-bold text-dnd-dark mb-1">16</div>
+                    <div class="text-lg md:text-xl text-dnd-border">+3</div>
+                    <div class="text-xs italic mt-2">Code Agility</div>
+                </div>
+                <div class="border-2 border-dnd-border p-3 md:p-4 text-center bg-white bg-opacity-40">
+                    <div class="font-cinzel text-xs md:text-sm uppercase tracking-wider text-dnd-border mb-2 font-semibold">Constitution</div>
+                    <div class="text-3xl md:text-4xl font-bold text-dnd-dark mb-1">15</div>
+                    <div class="text-lg md:text-xl text-dnd-border">+2</div>
+                    <div class="text-xs italic mt-2">Deadline Endurance</div>
+                </div>
+                <div class="border-2 border-dnd-border p-3 md:p-4 text-center bg-white bg-opacity-40">
+                    <div class="font-cinzel text-xs md:text-sm uppercase tracking-wider text-dnd-border mb-2 font-semibold">Intelligence</div>
+                    <div class="text-3xl md:text-4xl font-bold text-dnd-dark mb-1">18</div>
+                    <div class="text-lg md:text-xl text-dnd-border">+4</div>
+                    <div class="text-xs italic mt-2">Technical Skills</div>
+                </div>
+                <div class="border-2 border-dnd-border p-3 md:p-4 text-center bg-white bg-opacity-40">
+                    <div class="font-cinzel text-xs md:text-sm uppercase tracking-wider text-dnd-border mb-2 font-semibold">Wisdom</div>
+                    <div class="text-3xl md:text-4xl font-bold text-dnd-dark mb-1">17</div>
+                    <div class="text-lg md:text-xl text-dnd-border">+3</div>
+                    <div class="text-xs italic mt-2">Project Management</div>
+                </div>
+                <div class="border-2 border-dnd-border p-3 md:p-4 text-center bg-white bg-opacity-40">
+                    <div class="font-cinzel text-xs md:text-sm uppercase tracking-wider text-dnd-border mb-2 font-semibold">Charisma</div>
+                    <div class="text-3xl md:text-4xl font-bold text-dnd-dark mb-1">16</div>
+                    <div class="text-lg md:text-xl text-dnd-border">+3</div>
+                    <div class="text-xs italic mt-2">Client Relations</div>
+                </div>
+            </section>
+
+            <!-- Main Content Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                <!-- Skills Section -->
+                <section class="border-2 border-dnd-border p-4 md:p-6 bg-white bg-opacity-30 shadow-inner">
+                    <h2 class="font-cinzel text-lg md:text-xl mb-4 pb-3 border-b-2 border-dnd-border uppercase tracking-widest">Skills</h2>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center pb-2 border-b border-dnd-border border-opacity-20">
+                            <span class="flex items-center">
+                                <span class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-dnd-dark mr-2"></span>
+                                JavaScript
+                            </span>
+                            <span class="font-semibold text-sm md:text-base">Expert</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-2 border-b border-dnd-border border-opacity-20">
+                            <span class="flex items-center">
+                                <span class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-dnd-dark mr-2"></span>
+                                React
+                            </span>
+                            <span class="font-semibold text-sm md:text-base">Expert</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-2 border-b border-dnd-border border-opacity-20">
+                            <span class="flex items-center">
+                                <span class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-dnd-dark mr-2"></span>
+                                TypeScript
+                            </span>
+                            <span class="font-semibold text-sm md:text-base">Expert</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-2 border-b border-dnd-border border-opacity-20">
+                            <span class="flex items-center">
+                                <span class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-dnd-dark mr-2"></span>
+                                CSS/SCSS
+                            </span>
+                            <span class="font-semibold text-sm md:text-base">Expert</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="flex items-center">
+                                <span class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-dnd-dark mr-2"></span>
+                                HTML5
+                            </span>
+                            <span class="font-semibold text-sm md:text-base">Expert</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Proficiencies Section -->
+                <section class="border-2 border-dnd-border p-4 md:p-6 bg-white bg-opacity-30 shadow-inner">
+                    <h2 class="font-cinzel text-lg md:text-xl mb-4 pb-3 border-b-2 border-dnd-border uppercase tracking-widest">Proficiencies</h2>
+                    <div class="space-y-3">
+                        <div class="flex items-center pb-2 border-b border-dnd-border border-opacity-20">
+                            <span class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-dnd-dark mr-2"></span>
+                            Figma
+                        </div>
+                        <div class="flex items-center pb-2 border-b border-dnd-border border-opacity-20">
+                            <span class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-dnd-dark mr-2"></span>
+                            Git/GitHub
+                        </div>
+                        <div class="flex items-center pb-2 border-b border-dnd-border border-opacity-20">
+                            <span class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-dnd-dark mr-2"></span>
+                            Webpack
+                        </div>
+                        <div class="flex items-center pb-2 border-b border-dnd-border border-opacity-20">
+                            <span class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-dnd-dark mr-2"></span>
+                            Redux
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-dnd-dark mr-2"></span>
+                            Jest/Testing
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Languages Section -->
+                <section class="border-2 border-dnd-border p-4 md:p-6 bg-white bg-opacity-30 shadow-inner">
+                    <h2 class="font-cinzel text-lg md:text-xl mb-4 pb-3 border-b-2 border-dnd-border uppercase tracking-widest">Languages</h2>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center pb-2 border-b border-dnd-border border-opacity-20">
+                            <span class="flex items-center">
+                                <span class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-dnd-dark mr-2"></span>
+                                Python
+                            </span>
+                            <span class="text-sm md:text-base">Proficient</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-2 border-b border-dnd-border border-opacity-20">
+                            <span class="flex items-center">
+                                <span class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-dnd-dark mr-2"></span>
+                                Node.js
+                            </span>
+                            <span class="text-sm md:text-base">Proficient</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-2 border-b border-dnd-border border-opacity-20">
+                            <span class="flex items-center">
+                                <span class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-dnd-dark mr-2"></span>
+                                SQL
+                            </span>
+                            <span class="text-sm md:text-base">Intermediate</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="flex items-center">
+                                <span class="w-2 h-2 md:w-3 md:h-3 rounded-full bg-dnd-dark mr-2"></span>
+                                GraphQL
+                            </span>
+                            <span class="text-sm md:text-base">Intermediate</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Equipment/Portfolio Section -->
+            <section class="border-2 border-dnd-border p-4 md:p-6 bg-white bg-opacity-30 shadow-inner mb-6 md:mb-8">
+                <h2 class="font-cinzel text-lg md:text-xl mb-2 md:mb-3 pb-3 border-b-2 border-dnd-border uppercase tracking-widest">
+                    Equipment & Inventory
+                </h2>
+                <p class="italic mb-4 md:mb-6 text-dnd-dark text-sm md:text-base">
+                    Legendary artifacts forged in the fires of countless sprints
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+                    <div class="border-2 border-dnd-border p-4 bg-white bg-opacity-50 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                        <div class="w-full h-32 md:h-40 bg-gradient-to-br from-dnd-border to-dnd-dark mb-3 flex items-center justify-center text-parchment text-4xl md:text-5xl border border-dnd-border">
+                            🛒
+                        </div>
+                        <div class="font-semibold text-base md:text-lg mb-1">E-Commerce Platform</div>
+                        <div class="text-sm md:text-base text-dnd-dark">Full-stack shopping experience with React & Redux. Handles 10k+ daily users.</div>
+                    </div>
+                    <div class="border-2 border-dnd-border p-4 bg-white bg-opacity-50 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                        <div class="w-full h-32 md:h-40 bg-gradient-to-br from-dnd-border to-dnd-dark mb-3 flex items-center justify-center text-parchment text-4xl md:text-5xl border border-dnd-border">
+                            📊
+                        </div>
+                        <div class="font-semibold text-base md:text-lg mb-1">Analytics Dashboard</div>
+                        <div class="text-sm md:text-base text-dnd-dark">Real-time data visualization using D3.js and WebSocket integration.</div>
+                    </div>
+                    <div class="border-2 border-dnd-border p-4 bg-white bg-opacity-50 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                        <div class="w-full h-32 md:h-40 bg-gradient-to-br from-dnd-border to-dnd-dark mb-3 flex items-center justify-center text-parchment text-4xl md:text-5xl border border-dnd-border">
+                            🎨
+                        </div>
+                        <div class="font-semibold text-base md:text-lg mb-1">Design System</div>
+                        <div class="text-sm md:text-base text-dnd-dark">Component library with 50+ reusable components and comprehensive documentation.</div>
+                    </div>
+                    <div class="border-2 border-dnd-border p-4 bg-white bg-opacity-50 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                        <div class="w-full h-32 md:h-40 bg-gradient-to-br from-dnd-border to-dnd-dark mb-3 flex items-center justify-center text-parchment text-4xl md:text-5xl border border-dnd-border">
+                            📱
+                        </div>
+                        <div class="font-semibold text-base md:text-lg mb-1">Mobile App (PWA)</div>
+                        <div class="text-sm md:text-base text-dnd-dark">Progressive web app with offline capabilities and push notifications.</div>
+                    </div>
+                    <div class="border-2 border-dnd-border p-4 bg-white bg-opacity-50 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                        <div class="w-full h-32 md:h-40 bg-gradient-to-br from-dnd-border to-dnd-dark mb-3 flex items-center justify-center text-parchment text-4xl md:text-5xl border border-dnd-border">
+                            🎮
+                        </div>
+                        <div class="font-semibold text-base md:text-lg mb-1">Interactive Game</div>
+                        <div class="text-sm md:text-base text-dnd-dark">Browser-based puzzle game built with Canvas API and game physics engine.</div>
+                    </div>
+                    <div class="border-2 border-dnd-border p-4 bg-white bg-opacity-50 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+                        <div class="w-full h-32 md:h-40 bg-gradient-to-br from-dnd-border to-dnd-dark mb-3 flex items-center justify-center text-parchment text-4xl md:text-5xl border border-dnd-border">
+                            🌐
+                        </div>
+                        <div class="font-semibold text-base md:text-lg mb-1">SaaS Platform</div>
+                        <div class="text-sm md:text-base text-dnd-dark">Multi-tenant application with role-based access and subscription management.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Backstory Section -->
+            <section class="border-2 border-dnd-border p-4 md:p-6 lg:p-8 bg-white bg-opacity-30 shadow-inner">
+                <h2 class="font-cinzel text-lg md:text-xl mb-4 md:mb-6 pb-3 border-b-2 border-dnd-border uppercase tracking-widest">
+                    Backstory
+                </h2>
+                <p class="text-base md:text-lg leading-relaxed text-justify mb-4">
+                    In the ancient realm of Silicon Valley, where towers of glass pierce the clouds and streams of data flow like mighty rivers, there emerged a champion of the digital arts. Aiden Stormforge began their journey as a humble apprentice, learning the arcane languages of the web in the libraries of academia. Through countless trials and tribulations—debugging sessions that lasted until dawn, battles against the dreaded legacy code dragons, and quests to optimize performance metrics—they honed their craft to perfection.
+                </p>
+                <p class="text-base md:text-lg leading-relaxed text-justify">
+                    Now, as a Senior Frontend Developer, Aiden wields the powerful artifacts of modern web development with masterful precision. They have led parties of fellow developers through treacherous project dungeons, emerging victorious with pixel-perfect implementations and delighted clients. Their reputation for transforming complex requirements into elegant, accessible user experiences has spread across the land. When not crafting enchanting interfaces, Aiden mentors junior adventurers, sharing the wisdom gained from seven years of questing in the ever-evolving landscape of web technologies.
+                </p>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
