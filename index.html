@@ -76,9 +76,10 @@
 
         .triangle-container {
             position: relative;
-            width: 200px;
-            height: 200px;
+            width: 500px;
+            height: 450px;
             animation: pulse 2s ease-in-out infinite;
+            background-image: url('./d20-image.webp');
         }
 
         @keyframes pulse {
@@ -92,27 +93,28 @@
             }
         }
 
-        .triangle {
+        /* .triangle {
             width: 0;
             height: 0;
             border-left: 100px solid transparent;
             border-right: 100px solid transparent;
             border-bottom: 173px solid #ffc400;
             position: relative;
-            filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.9));
-        }
+            filter: drop-shadow(30px 30px 30px rgba(255, 215, 0, 0.9));
+        } */
 
-        .triangle-number {
+        /* .triangle-number {
             position: absolute;
             top: 50%;
             left: 50%;
+            z-index: -5;
             transform: translate(-50%, 75%);
             font-family: 'Cinzel', serif;
             font-size: 60px;
             font-weight: bold;
             color: #000;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
+        } */
 
         .critical-success {
             font-family: 'Cinzel', serif;
@@ -173,9 +175,9 @@
     <div id="splash-screen">
         <div id="dice-container">
             <div class="triangle-container">
-                <div class="triangle">
+                <!-- <div class="triangle">
                     <div class="triangle-number">20</div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="critical-success" id="critical-text">CRITICAL SUCCESS!</div>
