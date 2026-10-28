@@ -6,20 +6,163 @@
         <title>Character Sheet Portfolio</title>
         <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
         <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            title: ['Cinzel', 'serif'],
+                            body: ['"EB Garamond"', 'serif'],
+                        },
+                        colors: {
+                            parchment: '#f4ead5',
+                            parchmentDark: '#e6d5ae',
+                            ink: '#2b1d0e',
+                            blood: '#7a1f1f',
+                            gilt: '#a67c2d',
+                        },
+                    },
+                },
+            };
+        </script>
+        <style>
+            body {
+                background-color: #3a2a1a;
+                background-image:
+                    radial-gradient(circle at 20% 10%, rgba(255,255,255,0.04), transparent 40%),
+                    radial-gradient(circle at 80% 90%, rgba(0,0,0,0.25), transparent 50%);
+            }
+            .sheet {
+                background-color: #f4ead5;
+                background-image:
+                    radial-gradient(ellipse at top left, rgba(166,124,45,0.18), transparent 55%),
+                    radial-gradient(ellipse at bottom right, rgba(122,31,31,0.10), transparent 55%);
+                box-shadow: 0 10px 40px rgba(0,0,0,0.6), inset 0 0 60px rgba(120,80,20,0.25);
+            }
+            .double-border {
+                border: 3px double #7a1f1f;
+            }
+            .spell-row {
+                background-image: linear-gradient(to right, rgba(166,124,45,0.35), rgba(166,124,45,0));
+                background-size: 100% 1px;
+                background-repeat: no-repeat;
+                background-position: top;
+            }
+            .prepared-dot {
+                width: 1.1rem;
+                height: 1.1rem;
+                border: 2px solid #7a1f1f;
+                transform: rotate(45deg);
+                flex-shrink: 0;
+            }
+            .spell-row:hover .prepared-dot {
+                background: #7a1f1f;
+            }
+        </style>
     </head>
-    <body>
-        <div class="text-xl flex justify-center items-center">
-            Here is a list of my projects.
-        </div>
-        <div id="project-list">
-            <ul>
-                <li>
-                    Space BlackJack
-                </li>
-                <li>
-                    Wiz-Bo
-                </li>
-            </ul>
-        </div>
+    <body class="font-body text-ink min-h-screen py-6 px-3 sm:py-10">
+        <main class="sheet double-border max-w-4xl mx-auto rounded-sm p-5 sm:p-10">
+
+            <!-- Header -->
+            <header class="text-center border-b-2 border-gilt pb-5 mb-6">
+                <p class="font-title uppercase tracking-[0.35em] text-xs text-gilt">Grimoire of Works</p>
+                <h1 class="font-title font-bold text-3xl sm:text-5xl text-blood mt-1">Spells &amp; Cantrips</h1>
+                <p class="text-xl mt-3 italic">Here is a list of my projects.</p>
+            </header>
+
+            <!-- Spellcasting stats bar -->
+            <section class="grid grid-cols-3 gap-2 sm:gap-4 mb-8 text-center" aria-label="Spellcasting summary">
+                <div class="border-2 border-blood rounded-md py-2 bg-parchmentDark/40">
+                    <p class="font-title text-2xl sm:text-3xl font-bold text-blood">2</p>
+                    <p class="font-title uppercase text-[0.6rem] sm:text-xs tracking-widest">Spells Known</p>
+                </div>
+                <div class="border-2 border-blood rounded-md py-2 bg-parchmentDark/40">
+                    <p class="font-title text-2xl sm:text-3xl font-bold text-blood">Dev</p>
+                    <p class="font-title uppercase text-[0.6rem] sm:text-xs tracking-widest">Spellcasting Class</p>
+                </div>
+                <div class="border-2 border-blood rounded-md py-2 bg-parchmentDark/40">
+                    <p class="font-title text-2xl sm:text-3xl font-bold text-blood">+&infin;</p>
+                    <p class="font-title uppercase text-[0.6rem] sm:text-xs tracking-widest">Curiosity Bonus</p>
+                </div>
+            </section>
+
+            <!-- Project list -->
+            <div id="project-list">
+
+                <!-- Spell level banner -->
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="font-title font-bold text-2xl text-parchment bg-blood w-12 h-12 flex items-center justify-center rounded-full border-2 border-gilt shrink-0">1</div>
+                    <h2 class="font-title font-semibold text-xl sm:text-2xl uppercase tracking-wider text-blood">1st Level</h2>
+                    <div class="flex-1 border-t-2 border-gilt"></div>
+                </div>
+
+                <!-- Column labels (desktop) -->
+                <div class="hidden sm:grid grid-cols-12 gap-3 px-3 pb-1 font-title uppercase text-[0.65rem] tracking-widest text-gilt">
+                    <span class="col-span-5">Name</span>
+                    <span class="col-span-2">School</span>
+                    <span class="col-span-2">Casting Time</span>
+                    <span class="col-span-3">Components</span>
+                </div>
+
+                <ul class="space-y-1">
+                    <!-- TODO: replace the placeholder details below with your real project info -->
+                    <li class="spell-row group px-3 py-4 hover:bg-parchmentDark/50 transition-colors">
+                        <a href="#" class="block">
+                            <div class="flex items-start gap-3">
+                                <span class="prepared-dot mt-2 transition-colors"></span>
+                                <div class="flex-1">
+                                    <div class="sm:grid sm:grid-cols-12 sm:gap-3 sm:items-baseline">
+                                        <h3 class="sm:col-span-5 font-title font-bold text-xl text-ink group-hover:text-blood transition-colors">Space BlackJack</h3>
+                                        <p class="sm:col-span-2 italic">Conjuration</p>
+                                        <p class="sm:col-span-2">1 action</p>
+                                        <p class="sm:col-span-3 text-sm">V, S, M (JavaScript)</p>
+                                    </div>
+                                    <p class="mt-2 leading-snug">
+                                        A card game conjured among the stars. Hit, stand, and try not to bust in zero gravity.
+                                    </p>
+                                    <p class="mt-2 text-sm">
+                                        <span class="font-semibold text-blood">Range:</span> Playable in browser
+                                        <span class="mx-2 text-gilt">&#9670;</span>
+                                        <span class="font-semibold text-blood">Duration:</span> Until you go bust
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="spell-row group px-3 py-4 hover:bg-parchmentDark/50 transition-colors">
+                        <a href="#" class="block">
+                            <div class="flex items-start gap-3">
+                                <span class="prepared-dot mt-2 transition-colors"></span>
+                                <div class="flex-1">
+                                    <div class="sm:grid sm:grid-cols-12 sm:gap-3 sm:items-baseline">
+                                        <h3 class="sm:col-span-5 font-title font-bold text-xl text-ink group-hover:text-blood transition-colors">Wiz-Bo</h3>
+                                        <p class="sm:col-span-2 italic">Transmutation</p>
+                                        <p class="sm:col-span-2">1 action</p>
+                                        <p class="sm:col-span-3 text-sm">V, S, M (Your stack here)</p>
+                                    </div>
+                                    <p class="mt-2 leading-snug">
+                                        A short description of what Wiz-Bo does and the problem it solves. Replace me with your own incantation.
+                                    </p>
+                                    <p class="mt-2 text-sm">
+                                        <span class="font-semibold text-blood">Range:</span> Your link here
+                                        <span class="mx-2 text-gilt">&#9670;</span>
+                                        <span class="font-semibold text-blood">Duration:</span> Concentration
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Footer -->
+            <footer class="mt-10 pt-4 border-t-2 border-gilt flex flex-col sm:flex-row gap-3 justify-between items-center">
+                <a href="#" class="font-title uppercase tracking-widest text-sm text-blood hover:text-ink border-2 border-blood rounded px-4 py-2 transition-colors">
+                    &larr; Back to Character Sheet
+                </a>
+                <p class="font-title text-xs uppercase tracking-[0.3em] text-gilt">Page 2 &middot; Spells</p>
+            </footer>
+        </main>
     </body>
 </html>
