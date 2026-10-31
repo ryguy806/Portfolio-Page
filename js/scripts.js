@@ -8,6 +8,7 @@ setTimeout(5000)
 
 splashPage.addEventListener('transitionend', () => {
     if(splashPage.classList.contains("fade-out")) splashPage.style.display = 'none'
+    splashPage.remove()
 })
 
 const devYears = document.getElementById("years")

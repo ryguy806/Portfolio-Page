@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Immersive Meditation</title>
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            title: ['Cinzel', 'serif'],
+                            body: ['"EB Garamond"', 'serif'],
+                        },
+                        colors: {
+                            parchment: '#f4ead5',
+                            parchmentDark: '#e6d5ae',
+                            ink: '#2b1d0e',
+                            blood: '#7a1f1f',
+                            gilt: '#a67c2d',
+                        },
+                    },
+                },
+            };
+        </script>
+        <style>
+            body {
+                background-color: #3a2a1a;
+                background-image:
+                    radial-gradient(circle at 20% 10%, rgba(255,255,255,0.04), transparent 40%),
+                    radial-gradient(circle at 80% 90%, rgba(0,0,0,0.25), transparent 50%);
+            }
+            .sheet {
+                background-color: #f4ead5;
+                background-image:
+                    radial-gradient(ellipse at top left, rgba(166,124,45,0.18), transparent 55%),
+                    radial-gradient(ellipse at bottom right, rgba(122,31,31,0.10), transparent 55%);
+                box-shadow: 0 10px 40px rgba(0,0,0,0.6), inset 0 0 60px rgba(120,80,20,0.25);
+            }
+            .double-border {
+                border: 3px double #7a1f1f;
+            }
+        </style>
+    </head>
+    <body class="font-body text-ink min-h-screen py-6 px-3 sm:py-10">
+        <main class="sheet double-border max-w-4xl mx-auto rounded-sm p-5 sm:p-10">
+
+            <!-- Header -->
+            <header class="text-center border-b-2 border-gilt pb-5 mb-8">
+                <p class="font-title uppercase tracking-[0.35em] text-xs text-gilt">Artifact Demonstration</p>
+                <h1 class="font-title font-bold text-3xl sm:text-5xl text-blood mt-1">Immersive Meditation</h1>
+                <p class="text-xl mt-3 italic">A VR application PoC that provides a relaxing environment for the user to meditate.</p>
+            </header>
+
+            <!-- Video -->
+            <section class="border-2 border-blood rounded-md p-3 sm:p-5 bg-parchmentDark/30 mb-8">
+                <h2 class="font-title font-semibold text-lg md:text-xl mb-4 pb-3 border-b-2 border-gilt uppercase tracking-widest text-blood">
+                    Scrying Pool
+                </h2>
+
+                <div class="aspect-video w-full border-2 border-gilt rounded-sm overflow-hidden bg-ink shadow-inner">
+                    <!--
+                        When your video is ready, replace the placeholder <div> below with:
+
+                        <iframe
+                            class="w-full h-full"
+                            src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+                            title="Immersive Meditation demo"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen>
+                        </iframe>
+
+                        YOUR_VIDEO_ID is the part after "v=" in the YouTube URL.
+                    -->
+                    <div class="w-full h-full flex flex-col items-center justify-center text-parchment bg-gradient-to-br from-gilt/40 to-blood/60">
+                        <span class="text-5xl mb-3">🔮</span>
+                        <p class="font-title uppercase tracking-widest text-sm sm:text-base">The vision has not yet appeared</p>
+                        <p class="italic text-sm mt-1">Video coming soon</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="pt-4 border-t-2 border-gilt flex flex-col sm:flex-row gap-3 justify-between items-center">
+                <a href="./index.html" class="font-title uppercase tracking-widest text-sm text-blood hover:text-ink border-2 border-blood rounded px-4 py-2 transition-colors">
+                    &larr; Back to Character Sheet
+                </a>
+                <p class="font-title text-xs uppercase tracking-[0.3em] text-gilt">Equipment &middot; Demo</p>
+            </footer>
+        </main>
+    </body>
+</html>
