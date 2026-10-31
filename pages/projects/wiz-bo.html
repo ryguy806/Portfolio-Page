@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Wiz-Bo</title>
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            title: ['Cinzel', 'serif'],
+                            body: ['"EB Garamond"', 'serif'],
+                        },
+                        colors: {
+                            parchment: '#f4ead5',
+                            parchmentDark: '#e6d5ae',
+                            ink: '#2b1d0e',
+                            blood: '#7a1f1f',
+                            gilt: '#a67c2d',
+                        },
+                    },
+                },
+            };
+        </script>
+        <style>
+            body {
+                background-color: #3a2a1a;
+                background-image:
+                    radial-gradient(circle at 20% 10%, rgba(255,255,255,0.04), transparent 40%),
+                    radial-gradient(circle at 80% 90%, rgba(0,0,0,0.25), transparent 50%);
+            }
+            .sheet {
+                background-color: #f4ead5;
+                background-image:
+                    radial-gradient(ellipse at top left, rgba(166,124,45,0.18), transparent 55%),
+                    radial-gradient(ellipse at bottom right, rgba(122,31,31,0.10), transparent 55%);
+                box-shadow: 0 10px 40px rgba(0,0,0,0.6), inset 0 0 60px rgba(120,80,20,0.25);
+            }
+            .double-border {
+                border: 3px double #7a1f1f;
+            }
+            #lightbox[hidden] {
+                display: none;
+            }
+        </style>
+    </head>
+    <body class="font-body text-ink min-h-screen py-6 px-3 sm:py-10">
+        <main class="sheet double-border max-w-5xl mx-auto rounded-sm p-5 sm:p-10">
+
+            <!-- Header -->
+            <header class="text-center border-b-2 border-gilt pb-5 mb-8">
+                <p class="font-title uppercase tracking-[0.35em] text-xs text-gilt">Artifact Gallery</p>
+                <h1 class="font-title font-bold text-3xl sm:text-5xl text-blood mt-1">Wiz-Bo</h1>
+                <p class="text-xl mt-3 italic">A short description of Wiz-Bo goes here. Replace me with your own incantation.</p>
+            </header>
+
+            <!-- Screenshots -->
+            <section class="border-2 border-blood rounded-md p-4 md:p-6 bg-parchmentDark/30 mb-8">
+                <h2 class="font-title font-semibold text-lg md:text-xl mb-2 pb-3 border-b-2 border-gilt uppercase tracking-widest text-blood">
+                    Visions from the Tower
+                </h2>
+                <p class="italic mb-5 text-sm md:text-base">Select a screenshot to view it larger.</p>
+
+                <div id="screenshot-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+
+                    <!--
+                        To add a screenshot, copy one <figure> block below and change:
+                          - the <img> src (e.g. ./images/wiz-bo-1.png)
+                          - the alt text
+                          - the caption
+                        Delete the placeholder <div> inside <button> once you have a real image.
+                    -->
+
+                    <figure class="group border-2 border-gilt rounded-md p-3 bg-parchment/70 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:border-blood">
+                        <button type="button" class="screenshot-btn block w-full" data-full="" data-caption="Screenshot caption one">
+                            <div class="aspect-video w-full border-2 border-gilt rounded-sm overflow-hidden bg-gradient-to-br from-gilt to-blood flex flex-col items-center justify-center text-parchment">
+                                <span class="text-4xl mb-2">🧙</span>
+                                <span class="font-title uppercase tracking-widest text-xs">Screenshot 1</span>
+                            </div>
+                            <!-- <img src="./images/wiz-bo-1.png" alt="Description of screenshot" class="w-full h-auto border-2 border-gilt rounded-sm"> -->
+                        </button>
+                        <figcaption class="font-title font-bold text-base mt-3 group-hover:text-blood transition-colors">Screenshot title</figcaption>
+                        <p class="text-sm md:text-base">A short description of this screen.</p>
+                    </figure>
+
+                    <figure class="group border-2 border-gilt rounded-md p-3 bg-parchment/70 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:border-blood">
+                        <button type="button" class="screenshot-btn block w-full" data-full="" data-caption="Screenshot caption two">
+                            <div class="aspect-video w-full border-2 border-gilt rounded-sm overflow-hidden bg-gradient-to-br from-gilt to-blood flex flex-col items-center justify-center text-parchment">
+                                <span class="text-4xl mb-2">🪄</span>
+                                <span class="font-title uppercase tracking-widest text-xs">Screenshot 2</span>
+                            </div>
+                        </button>
+                        <figcaption class="font-title font-bold text-base mt-3 group-hover:text-blood transition-colors">Screenshot title</figcaption>
+                        <p class="text-sm md:text-base">A short description of this screen.</p>
+                    </figure>
+
+                    <figure class="group border-2 border-gilt rounded-md p-3 bg-parchment/70 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:border-blood">
+                        <button type="button" class="screenshot-btn block w-full" data-full="" data-caption="Screenshot caption three">
+                            <div class="aspect-video w-full border-2 border-gilt rounded-sm overflow-hidden bg-gradient-to-br from-gilt to-blood flex flex-col items-center justify-center text-parchment">
+                                <span class="text-4xl mb-2">🔮</span>
+                                <span class="font-title uppercase tracking-widest text-xs">Screenshot 3</span>
+                            </div>
+                        </button>
+                        <figcaption class="font-title font-bold text-base mt-3 group-hover:text-blood transition-colors">Screenshot title</figcaption>
+                        <p class="text-sm md:text-base">A short description of this screen.</p>
+                    </figure>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="pt-4 border-t-2 border-gilt flex flex-col sm:flex-row gap-3 justify-between items-center">
+                <div class="flex flex-row gap-2">
+                    <a href="../../index.html" class="font-title uppercase tracking-widest text-sm text-blood hover:text-ink border-2 border-blood rounded px-4 py-2 transition-colors">
+                        &larr; Back to Character Sheet
+                    </a>
+                    <a href="../projects.html" class="font-title uppercase tracking-widest text-sm text-blood hover:text-ink border-2 border-blood rounded px-4 py-2 transition-colors">
+                        &larr; Back to Projects
+                    </a>
+                </div>
+                <p class="font-title text-xs uppercase tracking-[0.3em] text-gilt">Equipment &middot; Gallery</p>
+            </footer>
+        </main>
+
+        <!-- Lightbox -->
+        <div id="lightbox" hidden class="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label="Screenshot viewer">
+            <div class="sheet double-border rounded-sm p-3 sm:p-5 max-w-3xl w-full max-h-full overflow-auto relative">
+                <button id="lightbox-close" type="button" aria-label="Close"
+                        class="absolute top-2 right-2 font-title text-blood border-2 border-blood rounded w-9 h-9 leading-none hover:bg-blood hover:text-parchment transition-colors">&times;</button>
+                <div id="lightbox-body" class="mt-8"></div>
+                <p id="lightbox-caption" class="font-title text-center uppercase tracking-widest text-sm text-blood mt-3"></p>
+            </div>
+        </div>
+
+        
+        <script>
+            (function () {
+                var lightbox = document.getElementById('lightbox');
+                var body = document.getElementById('lightbox-body');
+                var caption = document.getElementById('lightbox-caption');
+
+                function openLightbox(btn) {
+                    var img = btn.querySelector('img');
+                    body.innerHTML = '';
+                    if (img) {
+                        var clone = img.cloneNode(true);
+                        clone.className = 'w-full h-auto border-2 border-gilt rounded-sm';
+                        body.appendChild(clone);
+                    } else {
+                        var ph = btn.firstElementChild.cloneNode(true);
+                        body.appendChild(ph);
+                    }
+                    caption.textContent = btn.getAttribute('data-caption') || '';
+                    lightbox.hidden = false;
+                }
+
+                function closeLightbox() {
+                    lightbox.hidden = true;
+                    body.innerHTML = '';
+                }
+
+                document.querySelectorAll('.screenshot-btn').forEach(function (btn) {
+                    btn.addEventListener('click', function () { openLightbox(btn); });
+                });
+                document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+                lightbox.addEventListener('click', function (e) {
+                    if (e.target === lightbox) closeLightbox();
+                });
+                document.addEventListener('keydown', function (e) {
+                    if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
+                });
+            })();
+        </script>
+    </body>
+</html>
