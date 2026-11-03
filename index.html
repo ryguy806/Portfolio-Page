@@ -6,7 +6,7 @@
         <title>Character Sheet Portfolio</title>
         <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
         <!-- Fallback if JavaScript is disabled -->
-        <noscript><meta http-equiv="refresh" content="6;url=./index.html"></noscript>
+        <noscript><meta http-equiv="refresh" content="6;url=./character-sheet.html"></noscript>
         <style>
             html, body {
                 margin: 0;
@@ -42,24 +42,28 @@
             }
 
             #dice-container {
-                width: 400px;
-                height: 400px;
+                width: min(400px, 80vw);
+                aspect-ratio: 1 / 1;
                 margin-bottom: 30px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
             }
 
+            /* Fills the dice container so the image (and its pulse) is centered in it */
             .triangle-container {
-                position: relative;
-                width: 500px;
-                height: 450px;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 animation: pulse 2s ease-in-out infinite;
             }
 
             .triangle-container img {
                 max-width: 100%;
-                height: auto;
+                max-height: 100%;
+                object-fit: contain;
             }
 
             @keyframes pulse {
@@ -77,6 +81,8 @@
                 font-family: 'Cinzel', serif;
                 font-size: 48px;
                 font-weight: bold;
+                text-align: center;
+                padding: 0 16px;
                 color: #ffd700;
                 text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.5);
                 opacity: 0;
@@ -99,10 +105,6 @@
             }
 
             @media (max-width: 640px) {
-                #dice-container {
-                    width: 300px;
-                    height: 300px;
-                }
                 .critical-success {
                     font-size: 36px;
                 }
@@ -120,8 +122,6 @@
         </div>
 
         <script>
-            // Show the splash for 5s, let it fade out for 1s, then go to the home page.
-            // replace() keeps the splash out of the back-button history.
             setTimeout(function () {
                 window.location.replace('./character-sheet.html');
             }, 6000);
