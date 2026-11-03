@@ -133,7 +133,7 @@
 
         <!-- Lightbox -->
         <div id="lightbox" hidden class="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label="Screenshot viewer">
-            <div class="sheet double-border rounded-sm p-3 sm:p-5 max-w-3xl w-full max-h-full overflow-auto relative">
+            <div class="sheet double-border rounded-sm p-3 sm:p-5 max-w-5xl w-full h-full max-h-full overflow-auto relative">
                 <button id="lightbox-close" type="button" aria-label="Close"
                         class="absolute top-2 right-2 font-title text-blood border-2 border-blood rounded w-9 h-9 leading-none hover:bg-blood hover:text-parchment transition-colors">&times;</button>
                 <div id="lightbox-body" class="mt-8"></div>
@@ -149,14 +149,25 @@
 
                 function openLightbox(btn) {
                     var img = btn.querySelector('img');
+                    var video = btn.querySelector('iframe');
                     body.innerHTML = '';
                     if (img) {
                         var clone = img.cloneNode(true);
                         clone.className = 'w-full h-auto border-2 border-gilt rounded-sm';
                         body.appendChild(clone);
-                    } else {
-                        var ph = btn.firstElementChild.cloneNode(true);
-                        body.appendChild(ph);
+                    } else if (video) {
+                        // Wrap the video in a 16:9 box so its height follows its width
+                        var frame = video.cloneNode(true);
+                        frame.removeAttribute('width');
+                        frame.removeAttribute('height');
+                        frame.className = 'w-full h-full';
+
+                        var wrapper = document.createElement('div');
+                        wrapper.className = 'aspect-video w-full border-2 border-gilt rounded-sm overflow-hidden bg-ink';
+                        wrapper.appendChild(frame);
+                        body.appendChild(wrapper);
+                    } else if (btn.firstElementChild) {
+                        body.appendChild(btn.firstElementChild.cloneNode(true));
                     }
                     caption.textContent = btn.getAttribute('data-caption') || '';
                     lightbox.hidden = false;
