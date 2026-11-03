@@ -65,32 +65,34 @@
                 <p class="italic mb-5 text-sm md:text-base">Select a screenshot to view it larger.</p>
 
                 <div id="screenshot-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-                    <figure class="group border-2 border-gilt rounded-md p-3 bg-parchment/70 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:border-blood">
-                        <button type="button" class="screenshot-btn block w-full isolate" data-full="" data-caption="Home page">
-                            <iframe width="186" height="105" src="https://www.youtube.com/embed/munu0H1hlcM?si=VSGadfGp3P0Bz5FK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                   <figure class="relative group border-2 border-gilt rounded-md p-3 bg-parchment/70 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:border-blood">
+                        <button type="button" class="screenshot-btn block w-full isolate after:absolute after:inset-0 after:rounded-md cursor-pointer focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-blood" data-full="" data-caption="Home page">
+                            <div class="aspect-video w-full border-2 border-gilt rounded-sm overflow-hidden">
+                                <iframe class="w-full h-full" src="https://www.youtube.com/embed/munu0H1hlcM?si=VSGadfGp3P0Bz5FK" title="YouTube video player" frameborder="0" allow="encrypted-media; gyroscope; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
                         </button>
                         <figcaption class="font-title font-bold text-base mt-3 group-hover:text-blood transition-colors">Landing Page</figcaption>
                         <p class="text-sm md:text-base">A video showcasing the home page to the app.</p>
                     </figure>
 
-                    <figure class="group border-2 border-gilt rounded-md p-3 bg-parchment/70 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:border-blood">
-                        <button type="button" class="screenshot-btn block w-full" data-full="" data-caption="Search Page">
+                   <figure class="relative group border-2 border-gilt rounded-md p-3 bg-parchment/70 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:border-blood">
+                        <button type="button" class="screenshot-btn block w-full after:absolute after:inset-0 after:rounded-md cursor-pointer focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-blood" data-full="" data-caption="Search Page">
                             <img src="../assets/bga/bumblebot-garden-search.PNG" alt="BumbleBot Search Page" class="w-full h-auto border-2 border-gilt rounded-sm">
                         </button>
                         <figcaption class="font-title font-bold text-base mt-3 group-hover:text-blood transition-colors">Search Page</figcaption>
                         <p class="text-sm md:text-base">Look up your favorite plants and add them to your garden.</p>
                     </figure>
 
-                    <figure class="group border-2 border-gilt rounded-md p-3 bg-parchment/70 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:border-blood">
-                        <button type="button" class="screenshot-btn block w-full" data-full="" data-caption="My Plants List">
+                   <figure class="relative group border-2 border-gilt rounded-md p-3 bg-parchment/70 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:border-blood">
+                        <button type="button" class="screenshot-btn block w-full after:absolute after:inset-0 after:rounded-md cursor-pointer focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-blood" data-full="" data-caption="My Plants List">
                             <img src="../assets/bga/bumblebot-garden-my-plants.PNG" alt="BumbleBot My Plants List" class="w-full h-auto border-2 border-gilt rounded-sm">
                         </button>
                         <figcaption class="font-title font-bold text-base mt-3 group-hover:text-blood transition-colors">My Plants List</figcaption>
                         <p class="text-sm md:text-base">See your plants whenever you want!</p>
                     </figure>
 
-                    <figure class="group border-2 border-gilt rounded-md p-3 bg-parchment/70 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:border-blood">
-                        <button type="button" class="screenshot-btn block w-full" data-full="" data-caption="Plant Profile Page">
+                   <figure class="relative group border-2 border-gilt rounded-md p-3 bg-parchment/70 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:border-blood">
+                        <button type="button" class="screenshot-btn block w-full after:absolute after:inset-0 after:rounded-md cursor-pointer focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-blood" data-full="" data-caption="Plant Profile Page">
                             <img src="../assets/bga/bumblebot-garden-plant-profile.PNG" alt="BumbleBot Plant Profile" class="w-full h-auto border-2 border-gilt rounded-sm">
                         </button>
                         <figcaption class="font-title font-bold text-base mt-3 group-hover:text-blood transition-colors">Plant Profile Page</figcaption>
@@ -110,7 +112,7 @@
 
         <!-- Lightbox -->
         <div id="lightbox" hidden class="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label="Screenshot viewer">
-            <div class="sheet double-border rounded-sm p-3 sm:p-5 max-w-lg w-full max-h-full overflow-auto relative">
+            <div class="sheet double-border rounded-sm p-3 sm:p-5 max-w-5xl w-full h-full max-h-full overflow-auto relative">
                 <button id="lightbox-close" type="button" aria-label="Close"
                         class="absolute top-2 right-2 font-title text-blood border-2 border-blood rounded w-9 h-9 leading-none hover:bg-blood hover:text-parchment transition-colors">&times;</button>
                 <div id="lightbox-body" class="mt-8"></div>
@@ -126,14 +128,23 @@
 
                 function openLightbox(btn) {
                     var img = btn.querySelector('img');
+                    var video = btn.querySelector('iframe');
                     body.innerHTML = '';
                     if (img) {
                         var clone = img.cloneNode(true);
                         clone.className = 'w-full h-auto border-2 border-gilt rounded-sm';
                         body.appendChild(clone);
-                    } else {
-                        var ph = btn.firstElementChild.cloneNode(true);
-                        body.appendChild(ph);
+                    } else if (video) {
+                        // Wrap the video in a 16:9 box so its height follows its width
+                        var frame = video.cloneNode(true);
+                        frame.removeAttribute('width');
+                        frame.removeAttribute('height');
+                        frame.className = 'w-full h-full';
+
+                        var wrapper = document.createElement('div');
+                        wrapper.className = 'aspect-video w-full border-2 border-gilt rounded-sm overflow-hidden bg-ink';
+                        wrapper.appendChild(frame);
+                        body.appendChild(wrapper);
                     }
                     caption.textContent = btn.getAttribute('data-caption') || '';
                     lightbox.hidden = false;
