@@ -87,116 +87,153 @@
             </section>
 
             <!-- Project list -->
-            <div id="project-list">
+            <div id="project-list" class="gap-3">
+                <div class="pb-5">
+                    <!-- Spell level banner -->
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="font-title font-bold text-2xl text-parchment bg-blood w-12 h-12 flex items-center justify-center rounded-full border-2 border-gilt shrink-0">1</div>
+                        <h2 class="font-title font-semibold text-xl sm:text-2xl uppercase tracking-wider text-blood">1st Level</h2>
+                        <div class="flex-1 border-t-2 border-gilt"></div>
+                    </div>
 
-                <!-- Spell level banner -->
-                <div class="flex items-center gap-3 mb-3">
-                    <div class="font-title font-bold text-2xl text-parchment bg-blood w-12 h-12 flex items-center justify-center rounded-full border-2 border-gilt shrink-0">1</div>
-                    <h2 class="font-title font-semibold text-xl sm:text-2xl uppercase tracking-wider text-blood">1st Level</h2>
-                    <div class="flex-1 border-t-2 border-gilt"></div>
+                    <!-- Column labels (desktop) -->
+                    <div class="hidden sm:grid grid-cols-12 gap-3 px-3 pb-1 font-title uppercase text-[0.65rem] tracking-widest text-gilt">
+                        <span class="col-span-5">Name</span>
+                        <span class="col-span-2">School</span>
+                        <span class="col-span-2">Casting Time</span>
+                        <span class="col-span-3">Components</span>
+                    </div>
+
+                    <ul class="space-y-1">
+                        <li class="spell-row group px-3 py-4 hover:bg-parchmentDark/50 transition-colors">
+                            <a href="./projects/space-black-jack.html" class="block">
+                                <div class="flex items-start gap-3">
+                                    <span class="prepared-dot mt-2 transition-colors"></span>
+                                    <div class="flex-1">
+                                        <div class="sm:grid sm:grid-cols-12 sm:gap-3 sm:items-baseline">
+                                            <h3 class="sm:col-span-5 font-title font-bold text-xl text-ink group-hover:text-blood transition-colors">Space Blackjack</h3>
+                                            <p class="sm:col-span-2 italic">Conjuration</p>
+                                            <p class="sm:col-span-2">1 action</p>
+                                            <p class="sm:col-span-3 text-sm">V, S, M (Ruby/Ruby on Rails)</p>
+                                        </div>
+                                        <p class="mt-2 leading-snug">
+                                            A card game conjured among the stars. Hit, stand, and try not to bust in zero gravity.
+                                        </p>
+                                        <p class="mt-2 text-sm">
+                                            <span class="mx-2 text-gilt">&#9670;</span>
+                                            <span class="font-semibold text-blood">Duration:</span> Until you go bust
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="spell-row group px-3 py-4 hover:bg-parchmentDark/50 transition-colors">
+                            <a href="./projects/wiz-bo.html" class="block">
+                                <div class="flex items-start gap-3">
+                                    <span class="prepared-dot mt-2 transition-colors"></span>
+                                    <div class="flex-1">
+                                        <div class="sm:grid sm:grid-cols-12 sm:gap-3 sm:items-baseline">
+                                            <h3 class="sm:col-span-5 font-title font-bold text-xl text-ink group-hover:text-blood transition-colors">Wiz-Bo</h3>
+                                            <p class="sm:col-span-2 italic">Transmutation</p>
+                                            <p class="sm:col-span-2">1 action</p>
+                                            <p class="sm:col-span-3 text-sm">V, S, M (TypeScript/React)</p>
+                                        </div>
+                                        <p class="mt-2 leading-snug">
+                                            A fun game of Skip-Bo, but with <i>MAGIC!</i>
+                                        </p>
+                                        <p class="mt-2 text-sm">
+                                            <span class="mx-2 text-gilt">&#9670;</span>
+                                            <span class="font-semibold text-blood">Duration:</span> Instantaneous
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
 
-                <!-- Column labels (desktop) -->
-                <div class="hidden sm:grid grid-cols-12 gap-3 px-3 pb-1 font-title uppercase text-[0.65rem] tracking-widest text-gilt">
-                    <span class="col-span-5">Name</span>
-                    <span class="col-span-2">School</span>
-                    <span class="col-span-2">Casting Time</span>
-                    <span class="col-span-3">Components</span>
+                <div class="pb-5">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="font-title font-bold text-2xl text-parchment bg-blood w-12 h-12 flex items-center justify-center rounded-full border-2 border-gilt shrink-0">2</div>
+                        <h2 class="font-title font-semibold text-xl sm:text-2xl uppercase tracking-wider text-blood">2nd Level</h2>
+                        <div class="flex-1 border-t-2 border-gilt"></div>
+                    </div>
+    
+                    <!-- Column labels (desktop) -->
+                    <div class="hidden sm:grid grid-cols-12 gap-3 px-3 pb-1 font-title uppercase text-[0.65rem] tracking-widest text-gilt">
+                        <span class="col-span-5">Name</span>
+                        <span class="col-span-2">School</span>
+                        <span class="col-span-2">Casting Time</span>
+                        <span class="col-span-3">Components</span>
+                    </div>
+    
+                    <ul class="space-y-1">
+                        <li class="spell-row group px-3 py-4 hover:bg-parchmentDark/50 transition-colors">
+                            <a href="./projects/space-black-jack.html" class="block">
+                                <div class="flex items-start gap-3">
+                                    <span class="prepared-dot mt-2 transition-colors"></span>
+                                    <div class="flex-1">
+                                        <div class="sm:grid sm:grid-cols-12 sm:gap-3 sm:items-baseline">
+                                            <h3 class="sm:col-span-5 font-title font-bold text-xl text-ink group-hover:text-blood transition-colors">BumbleBot Garden App</h3>
+                                            <p class="sm:col-span-2 italic">Conjuration</p>
+                                            <p class="sm:col-span-2">1 action</p>
+                                            <p class="sm:col-span-3 text-sm">V, S, M (TypeScript/WaspJS)</p>
+                                        </div>
+                                        <p class="mt-2 leading-snug">
+                                            A PWA designed to assist home gardeners track and care for their plants.
+                                        </p>
+                                        <p class="mt-2 text-sm">
+                                            <span class="mx-2 text-gilt">&#9670;</span>
+                                            <span class="font-semibold text-blood">Duration:</span> Until the end of the growing season
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
 
-                <ul class="space-y-1">
-                    <li class="spell-row group px-3 py-4 hover:bg-parchmentDark/50 transition-colors">
-                        <a href="./demo.html" class="block">
-                            <div class="flex items-start gap-3">
-                                <span class="prepared-dot mt-2 transition-colors"></span>
-                                <div class="flex-1">
-                                    <div class="sm:grid sm:grid-cols-12 sm:gap-3 sm:items-baseline">
-                                        <h3 class="sm:col-span-5 font-title font-bold text-xl text-ink group-hover:text-blood transition-colors">Immersive Meditation Proof of Concept App</h3>
-                                        <p class="sm:col-span-2 italic">Conjuration</p>
-                                        <p class="sm:col-span-2">1 action</p>
-                                        <p class="sm:col-span-3 text-sm">V, S, M (Swift/SwiftUI)</p>
+                <div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="font-title font-bold text-2xl text-parchment bg-blood w-12 h-12 flex items-center justify-center rounded-full border-2 border-gilt shrink-0">3</div>
+                        <h2 class="font-title font-semibold text-xl sm:text-2xl uppercase tracking-wider text-blood">3rd Level</h2>
+                        <div class="flex-1 border-t-2 border-gilt"></div>
+                    </div>
+    
+                    <!-- Column labels (desktop) -->
+                    <div class="hidden sm:grid grid-cols-12 gap-3 px-3 pb-1 font-title uppercase text-[0.65rem] tracking-widest text-gilt">
+                        <span class="col-span-5">Name</span>
+                        <span class="col-span-2">School</span>
+                        <span class="col-span-2">Casting Time</span>
+                        <span class="col-span-3">Components</span>
+                    </div>
+    
+                    <ul class="space-y-1">
+                        <li class="spell-row group px-3 py-4 hover:bg-parchmentDark/50 transition-colors">
+                            <a href="./demo.html" class="block">
+                                <div class="flex items-start gap-3">
+                                    <span class="prepared-dot mt-2 transition-colors"></span>
+                                    <div class="flex-1">
+                                        <div class="sm:grid sm:grid-cols-12 sm:gap-3 sm:items-baseline">
+                                            <h3 class="sm:col-span-5 font-title font-bold text-xl text-ink group-hover:text-blood transition-colors">Immersive Meditation Proof of Concept App</h3>
+                                            <p class="sm:col-span-2 italic">Conjuration</p>
+                                            <p class="sm:col-span-2">1 action</p>
+                                            <p class="sm:col-span-3 text-sm">V, S, M (Swift/SwiftUI)</p>
+                                        </div>
+                                        <p class="mt-2 leading-snug">
+                                            A meditation app for the Apple Vision Pro to help users relax in a virtual space.
+                                        </p>
+                                        <p class="mt-2 text-sm">
+                                            <span class="mx-2 text-gilt">&#9670;</span>
+                                            <span class="font-semibold text-blood">Duration:</span> Until you complete a long rest
+                                        </p>
                                     </div>
-                                    <p class="mt-2 leading-snug">
-                                        A meditation app for the Apple Vision Pro to help users relax in a virtual space.
-                                    </p>
-                                    <p class="mt-2 text-sm">
-                                        <span class="mx-2 text-gilt">&#9670;</span>
-                                        <span class="font-semibold text-blood">Duration:</span> Until you complete a long rest
-                                    </p>
                                 </div>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li class="spell-row group px-3 py-4 hover:bg-parchmentDark/50 transition-colors">
-                        <a href="./projects/space-black-jack.html" class="block">
-                            <div class="flex items-start gap-3">
-                                <span class="prepared-dot mt-2 transition-colors"></span>
-                                <div class="flex-1">
-                                    <div class="sm:grid sm:grid-cols-12 sm:gap-3 sm:items-baseline">
-                                        <h3 class="sm:col-span-5 font-title font-bold text-xl text-ink group-hover:text-blood transition-colors">BumbleBot Garden App</h3>
-                                        <p class="sm:col-span-2 italic">Conjuration</p>
-                                        <p class="sm:col-span-2">1 action</p>
-                                        <p class="sm:col-span-3 text-sm">V, S, M (TypeScript/WaspJS)</p>
-                                    </div>
-                                    <p class="mt-2 leading-snug">
-                                        A PWA designed to assist home gardeners track and care for their plants.
-                                    </p>
-                                    <p class="mt-2 text-sm">
-                                        <span class="mx-2 text-gilt">&#9670;</span>
-                                        <span class="font-semibold text-blood">Duration:</span> Until the end of the growing season
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li class="spell-row group px-3 py-4 hover:bg-parchmentDark/50 transition-colors">
-                        <a href="./projects/space-black-jack.html" class="block">
-                            <div class="flex items-start gap-3">
-                                <span class="prepared-dot mt-2 transition-colors"></span>
-                                <div class="flex-1">
-                                    <div class="sm:grid sm:grid-cols-12 sm:gap-3 sm:items-baseline">
-                                        <h3 class="sm:col-span-5 font-title font-bold text-xl text-ink group-hover:text-blood transition-colors">Space Blackjack</h3>
-                                        <p class="sm:col-span-2 italic">Conjuration</p>
-                                        <p class="sm:col-span-2">1 action</p>
-                                        <p class="sm:col-span-3 text-sm">V, S, M (Ruby/Ruby on Rails)</p>
-                                    </div>
-                                    <p class="mt-2 leading-snug">
-                                        A card game conjured among the stars. Hit, stand, and try not to bust in zero gravity.
-                                    </p>
-                                    <p class="mt-2 text-sm">
-                                        <span class="mx-2 text-gilt">&#9670;</span>
-                                        <span class="font-semibold text-blood">Duration:</span> Until you go bust
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li class="spell-row group px-3 py-4 hover:bg-parchmentDark/50 transition-colors">
-                        <a href="./projects/wiz-bo.html" class="block">
-                            <div class="flex items-start gap-3">
-                                <span class="prepared-dot mt-2 transition-colors"></span>
-                                <div class="flex-1">
-                                    <div class="sm:grid sm:grid-cols-12 sm:gap-3 sm:items-baseline">
-                                        <h3 class="sm:col-span-5 font-title font-bold text-xl text-ink group-hover:text-blood transition-colors">Wiz-Bo</h3>
-                                        <p class="sm:col-span-2 italic">Transmutation</p>
-                                        <p class="sm:col-span-2">1 action</p>
-                                        <p class="sm:col-span-3 text-sm">V, S, M (TypeScript/React)</p>
-                                    </div>
-                                    <p class="mt-2 leading-snug">
-                                        A fun game of Skip-Bo, but with <i>MAGIC!</i>
-                                    </p>
-                                    <p class="mt-2 text-sm">
-                                        <span class="mx-2 text-gilt">&#9670;</span>
-                                        <span class="font-semibold text-blood">Duration:</span> Instantaneous
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <!-- Footer -->
